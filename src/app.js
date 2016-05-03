@@ -14,16 +14,14 @@ queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'
 queryParams += '&' + encodeURIComponent('sidoName') + '=' + encodeURIComponent('서울'); /* sidoName */
 queryParams += '&' + encodeURIComponent('_returnType') + '=' + encodeURIComponent('json'); //return type
 
-var data ;
-var api = request({
-    url: url + queryParams,
-    method: 'GET'
-}, function (error, response, body) {
-    data = body;
-});
-
 app.get('/', function(req, res){
-    res.send(data);
+    console.log ("runing")
+    request({
+        url: url + queryParams,
+        method: 'GET'
+    }, function (error, response, body) {
+        res.send(body)
+    });
 });
 
 app.listen(3000);
