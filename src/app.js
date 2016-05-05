@@ -1,6 +1,8 @@
 var request = require('request');
 var express = require('express');
+var mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/atmos')
 
 var app = express()
 
