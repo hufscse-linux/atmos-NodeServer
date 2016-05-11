@@ -6,6 +6,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "gulp": "^3.9.1",
+    "gulp-bg": "0.0.8",
+    "gulp-live-server": "0.0.29",
     "mongoose": "^4.4.16"
   },
   "devDependencies": {},
