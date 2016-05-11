@@ -1,1 +1,3 @@
 servicekey.txt
+tmp/*
+node_modules/*
