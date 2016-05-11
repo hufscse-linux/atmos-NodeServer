@@ -3,10 +3,12 @@ var express = require('express');
 var mongoose = require('mongoose');
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/atmos')
+var mongodb_path = process.env.MONGODB_URI;
+var http_port = process.env.PORT;
+mongoose.connect(mongodb_path)
 
 var app = express()
-var servicekey = fs.readFileSync("./servicekey.txt", "utf8")
+var servicekey = fs.readFileSync(__dirname + "/servicekey.txt", "utf8")
 servicekey = servicekey.replace(/(\r\n|\n|\r)/gm,"");
 
 var url = 'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty';
@@ -32,5 +34,5 @@ app.get('/', function(req, res){
    res.send(data);
 });
 
-app.listen(3000);
+app.listen(http_port);
 console.log("Express Listening on port 3000...")
