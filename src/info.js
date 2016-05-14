@@ -23,21 +23,36 @@ queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'
 queryParams += '&' + encodeURIComponent('sidoName') + '=' + encodeURIComponent('서울'); /* sidoName */
 queryParams += '&' + encodeURIComponent('_returnType') + '=' + encodeURIComponent('json'); //return type
 
+
+
+
+function each(list, callback) {
+    for(var i in list) {
+        callback(list[i]);
+    }
+}
+
 request({
     url: url + queryParams,
     method: 'GET'
 }, function (error, response, body){
      var data = JSON.parse(body)
-     for (a in data.list) {
-         info = data.list[a];
+     each(data.list, function(info) {
+         //info = data.list[a];
          var instance = new atmosModel();
          instance.name = info.stationName;
          instance.data.CAIValue = info.khaiValue;
          instance.data.CAIGrade = info.khaiGrade;
-         instance.save(function(err){});
-         console.log("save the data")
-         console.log(info)
-     }
+         instance.save(function(err){
+            if (err) {
+                console.log("error")
+            }
+            console.log("save the data")
+            atmosModel.find({ name : info.stationName}, function (err, e){
+                console.log(e)
+            });
+         });
+     });
 });
 
 
